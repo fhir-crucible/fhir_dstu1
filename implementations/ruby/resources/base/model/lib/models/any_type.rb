@@ -50,7 +50,6 @@ module FHIR
           end
           convertType(v)
         else
-          binding.pry
           convertType(object)
         end
       end
