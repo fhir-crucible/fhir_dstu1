@@ -147,6 +147,7 @@ import org.hl7.fhir.tools.implementations.delphi.DelphiGenerator;
 import org.hl7.fhir.tools.implementations.java.JavaGenerator;
 import org.hl7.fhir.tools.implementations.javascript.JavaScriptGenerator;
 import org.hl7.fhir.tools.implementations.objectivec.ObjectiveCGenerator;
+import org.hl7.fhir.tools.implementations.ruby.RubyGenerator;
 import org.hl7.fhir.utilities.CSFile;
 import org.hl7.fhir.utilities.CSFileInputStream;
 import org.hl7.fhir.utilities.IniFile;
@@ -665,11 +666,13 @@ public class Publisher {
   private void registerReferencePlatforms() {
     javaReferencePlatform = new JavaGenerator(page.getFolders());
     page.getReferenceImplementations().add(javaReferencePlatform);
-    page.getReferenceImplementations().add(new CSharpGenerator());
-    page.getReferenceImplementations().add(new DelphiGenerator());
-    page.getReferenceImplementations().add(new ObjectiveCGenerator());
-    page.getReferenceImplementations().add(new XMLToolsGenerator());
-    page.getReferenceImplementations().add(new JavaScriptGenerator());
+    page.getReferenceImplementations().add(new RubyGenerator());
+    // TODO: these should be uncommented when complete
+//    page.getReferenceImplementations().add(new CSharpGenerator());
+//    page.getReferenceImplementations().add(new DelphiGenerator());
+//    page.getReferenceImplementations().add(new ObjectiveCGenerator());
+//    page.getReferenceImplementations().add(new XMLToolsGenerator());
+//    page.getReferenceImplementations().add(new JavaScriptGenerator());
     
     // page.getReferenceImplementations().add(new ECoreOclGenerator());
   }
@@ -992,6 +995,7 @@ public class Publisher {
       else
         gen.generate(eCoreDefs, destDir, implDir, page.getVersion(), page.getGenDate().getTime(), page, page.getSvnRevision());
     }
+    System.exit(0);
     for (PlatformGenerator gen : page.getReferenceImplementations()) {
       if (gen.doesCompile()) {
         page.log("Compile " + gen.getName() + " Reference Implementation", LogMessageType.Process);
