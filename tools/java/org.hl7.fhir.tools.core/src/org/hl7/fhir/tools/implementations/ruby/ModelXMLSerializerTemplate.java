@@ -79,7 +79,7 @@ public class ModelXMLSerializerTemplate extends ResourceGenerator {
       }
 
       block.es();
-      block.ln("</<%= name %>>");
+      block.ln("</<%= (is_lowercase) ? name.downcase : name %>>");
 
       Writer modelFile = new BufferedWriter(new FileWriter(embeddedTemplate));
       modelFile.write(block.toString());
@@ -123,7 +123,7 @@ public class ModelXMLSerializerTemplate extends ResourceGenerator {
   @Override
   protected void generateResourceFooter(GenBlock fileBlock) {
     fileBlock.es();
-    fileBlock.ln("</<%= name || '" + name + "' %>>");
+    fileBlock.ln("</<%= (is_lowercase) ? local_name.downcase : local_name %>>");
   }
 
   @Override
