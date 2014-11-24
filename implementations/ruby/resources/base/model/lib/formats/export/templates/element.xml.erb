@@ -6,6 +6,6 @@
 
 <% if !model.modifierExtensions.blank? %>
     <%model.modifierExtensions.each do |element|%>
-      <%== element.to_xml(name: 'modifierExtension', is_root: false) %>
+      <%== element.to_xml(name: 'modifierExtension', is_root: false, is_lowercase: true) %>
     <%end%>
 <% end %>
