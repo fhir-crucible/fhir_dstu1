@@ -32,7 +32,7 @@ module FHIR
             time = DateTime.parse(object)
           end
         else 
-          time = ActiveSupport::TimeWithZone..mongoize(object)
+          time = ActiveSupport::TimeWithZone.mongoize(object)
         end
         {'time'=>time, 'precision'=>time.precision}
       end
