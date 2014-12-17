@@ -61,7 +61,7 @@ public class ModelXMLSerializerTemplate extends ResourceGenerator {
 
       block = new GenBlock();
       String className = getEmbeddedClassName(elementDefinition, null);
-      File embeddedTemplate = new File(parentDir, name + "_" + className + ".xml.erb");
+      File embeddedTemplate = new File(parentDir, name.toLowerCase() + "_" + className + ".xml.erb");
       if (embeddedTemplate.exists()) throw new IOException("Multiple templates resolve to the same file");
 
       block.ln("<<%= (is_lowercase) ? name.downcase : name %>");
@@ -240,13 +240,13 @@ public class ModelXMLSerializerTemplate extends ResourceGenerator {
       return ""
           + "<%- if (!model." + typeName + "().nil? && !model." + typeName + ".empty?) -%>"
           +   "<%- model." + typeName + "().each do |element| -%>"
-          +     "<%== render :template => '" + template + "', :locals => {name: '" + originalTypeName + "', model: element} %>"
+          +     "<%== render :template => '" + template.toLowerCase() + "', :locals => {name: '" + originalTypeName + "', model: element} %>"
           +   "<%- end -%>"
           + "<%- end -%>";
     } else {
       return ""
           + "<%- if !model." + typeName + "().nil? -%>"
-          +   "<%== render :template => '" + template + "', :locals => {name: '" + originalTypeName + "', model: model." + typeName + "()} %>"
+          +   "<%== render :template => '" + template.toLowerCase() + "', :locals => {name: '" + originalTypeName + "', model: model." + typeName + "()} %>"
           + "<%- end -%>";
     }
   }
